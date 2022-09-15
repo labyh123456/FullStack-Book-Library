@@ -1,8 +1,31 @@
 {
   "scripts": {
-    "start": "node app.js"
+    "start": "node app.js",
+    "devStart": "nodemon app.js"
   },
   "dependencies": {
-    "express": "^4.18.1"
-  }
+    "ejs": "^3.1.8",
+    "express": "^4.18.1",
+    "express-ejs-layouts": "^2.5.1",
+    "mongoose": "^6.6.1"
+  },
+  "name": "temp",
+  "version": "1.0.0",
+  "main": "app.js",
+  "devDependencies": {
+    "dotenv": "^16.0.2",
+    "nodemon": "^2.0.19"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/labyh123456/new.git"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/labyh123456/new/issues"
+  },
+  "homepage": "https://github.com/labyh123456/new#readme",
+  "description": ""
 }

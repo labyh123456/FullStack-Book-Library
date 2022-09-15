@@ -1,12 +1,46 @@
-const express  = require('express');
+if (process.env.NODE_ENV !== 'production') { require('dotenv').config() }
+const express = require('express');
 const port = process.env.PORT || 8080;
 const app = express();
+const expressLayouts = require('express-ejs-layouts');
 
 
-app.get('/', (req, res) => {
-    res.send('hello world can yo do bro right now if you can help ? because');
-})
+//import router files
+const indexRouter = require('./routes/index')
+
+// set the view engine
+app.set('view engine', 'ejs');
+app.set('views', __dirname + '/views');
+app.set('layout', 'layouts/layout');
+app.use(expressLayouts);
+
+// public files
+app.use(express.static('public'));
+
+
+// app.get('/', (req, res) => {
+//     res.send('hello world can yo do bro right now if you can help ? because');
+// })
 console.log('hello dear');
-app.listen(port, ()=> {
+
+// import db 
+const mongoose = require("mongoose");
+
+mongoose
+
+    .connect(process.env.DATABASE_URL, {
+
+        useNewUrlParser: true,
+
+    })
+
+    .then(() => console.log("Database Connected Successfully ss"))
+
+    .catch((err) => console.log(err));
+
+
+app.use('/', indexRouter);
+
+app.listen(port, () => {
     console.log(`Listning on the port at ${port}`);
 });
