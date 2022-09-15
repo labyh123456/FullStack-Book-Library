@@ -5,8 +5,15 @@ const app = express();
 const expressLayouts = require('express-ejs-layouts');
 
 
+//configure bodyParser
+const bodyParser = require('body-parser');
+app.use(bodyParser.urlencoded({limit:'10mb', extended:false}))
+
+
+
 //import router files
 const indexRouter = require('./routes/index')
+const authorRouter = require('./routes/authors')
 
 // set the view engine
 app.set('view engine', 'ejs');
@@ -40,6 +47,8 @@ mongoose
 
 
 app.use('/', indexRouter);
+app.use('/authors', authorRouter);
+
 
 app.listen(port, () => {
     console.log(`Listning on the port at ${port}`);
