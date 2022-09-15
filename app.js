@@ -4,7 +4,7 @@ const app = express();
 
 
 app.get('/', (req, res) => {
-    res.send('hello world can yo do bro right now if you');
+    res.send('hello world can yo do bro right now if you can help ? because');
 })
 console.log('hello dear');
 app.listen(port, ()=> {
