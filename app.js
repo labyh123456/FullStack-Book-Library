@@ -14,6 +14,7 @@ app.use(bodyParser.urlencoded({limit:'10mb', extended:false}))
 //import router files
 const indexRouter = require('./routes/index')
 const authorRouter = require('./routes/authors')
+const bookRouter = require('./routes/books')
 
 // set the view engine
 app.set('view engine', 'ejs');
@@ -48,7 +49,7 @@ mongoose
 
 app.use('/', indexRouter);
 app.use('/authors', authorRouter);
-
+app.use('/books', bookRouter);
 
 app.listen(port, () => {
     console.log(`Listning on the port at ${port}`);
