@@ -1,6 +1,7 @@
 if (process.env.NODE_ENV !== 'production') { require('dotenv').config() }
 const express = require('express');
 const port = process.env.PORT || 8080;
+const methodOverride = require('method-override');
 const app = express();
 const expressLayouts = require('express-ejs-layouts');
 
@@ -9,7 +10,8 @@ const expressLayouts = require('express-ejs-layouts');
 const bodyParser = require('body-parser');
 app.use(bodyParser.urlencoded({limit:'10mb', extended:false}))
 
-
+//use method override
+app.use(methodOverride('_method'));
 
 //import router files
 const indexRouter = require('./routes/index')

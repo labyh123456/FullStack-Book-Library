@@ -9,7 +9,7 @@ let query = Book.find();
 // Filtering title of book
 if(req.query.title != null && req.query.title != ''){
     query = query.regex('name', new RegExp(req.query.title, 'i'))
-    console.log('here')
+    // console.log('here')
 }
 
 
@@ -27,13 +27,13 @@ if(req.query.publishAfter != null && req.query.publishAfter != ''){
 try {
 
     const books = await query.exec()
-    console.log(books)
+    // console.log(books)
     res.render('books/index', {
         books:books,
         searchOption:req.query
     })
 } catch (error) {
-    
+    console.log(error)
 }
 
 })
@@ -64,7 +64,7 @@ router.get('/new', async  (req, res) => {
 })
 // Create Book Route
 router.post('/',   async (req, res) => {
-    console.log('here' , req.file)
+    // console.log('here' , req.file)
 // res.send('create book')
 const filename = req.file != null ? req.file.filename: null
 const book = new Book({
@@ -81,7 +81,7 @@ try {
     const newBook = await book.save();
     res.redirect('/books');
 } catch (error) {
-    console.log('somewhete', error);
+    // console.log('somewhete', error);
     renderNewPage(res, book, true)
 }
 })
@@ -101,7 +101,7 @@ async function renderNewPage(res, book, hasError = false){
             res.render('books/new', params);
     
     } catch(error) {
-        console.log(error)
+        // console.log(error)
         res.redirect('/books');
     }
     
