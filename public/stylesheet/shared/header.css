@@ -1,0 +1,38 @@
+:root{
+--header-title-font-size:2rem;
+--header-title-font-weight:bold;
+--header-link-font-weight:300;
+
+
+}
+.header-title{
+color: var(--color-text-light);
+text-decoration: none;
+font-size: var(--header-title-font-size);
+font-weight: var(--header-title-font-weight);
+}
+.header-nav{
+    display: flex;
+    justify-content: space-between;
+    flex-wrap: wrap;
+    align-items: center;
+    margin-bottom: 5rem;
+}
+.header-nav ul{
+    display: flex;
+    margin: 0;
+    padding: 0;
+}
+.header-link{
+    list-style: none;
+
+}
+.header-nav li a{
+    text-decoration: none;
+    color: var(--color-text-light);
+    padding: 1rem;
+    font-weight: var(--header-title-font-weight);
+}
+.header-nav li a:hover, .header-title:hover{
+color: white;
+}
