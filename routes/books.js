@@ -1,6 +1,7 @@
 const express = require('express');
 const router = express.Router();
 const Book = require('../modal/book')
+const { check, validationResult } = require('express-validator');
 const Author = require('../modal/author');
 const imageMimeTypes = ['image/jpeg', 'image/png', 'image/gif'];
 
@@ -43,7 +44,7 @@ try {
 
 //New Book Router
 router.get('/new', async  (req, res) => {
-    renderNewPage(res, new Book(), 'new');
+    renderNewPage(res, new Book(), 'new', false);
 })
 
 
@@ -103,10 +104,14 @@ router.put('/:id', async (req, res) => {
 
 
 // Create Book Route
-router.post('/',   async (req, res) => {
-    // console.log('here' , req.file)
-// res.send('create book')
-const filename = req.file != null ? req.file.filename: null
+router.post('/',   [check('title').isEmpty(), check(' req.body.publishDate').isEmpty(), check(' req.body.author').isEmpty(), check('req.body.description').isEmpty(), ], async  (req, res) => {
+
+    const error = validationResult(req);
+    if (error.isEmpty()) {
+        console.log(error);
+        renderNewPage(res, new Book(), 'new', true);
+        return;
+    }
 const book = new Book({
     name:req.body.title,
     author:req.body.author,
@@ -116,12 +121,14 @@ const book = new Book({
 });
 
 saveCover(book, req.body.cover);
-
+if(req.body.cover == '' || req.body.cover == null)
+{
+    console.log('error for creating book')
+}
 try {
     const newBook = await book.save();
     res.redirect('/books');
 } catch (error) {
-    // console.log('somewhete', error);
     renderNewPage(res, book, true)
 }
 })
@@ -146,7 +153,7 @@ router.delete('/:id', async (req, res) => {
 })
 
 
-async function renderNewPage(res, book, form ,hasError = false){
+async function renderNewPage(res, book, form ,hasError){
     renderFormPage(res, book, form, hasError);
 }
 

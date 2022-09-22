@@ -39,7 +39,7 @@ router.post('/', async (req, res) => {
         if (err) {
             res.render('authors/new', {
                 author: author,
-                errorMessage: 'eror SomeWhere'
+                errorMessage: 'Error Creating Author'
             })
         }
         else {
@@ -104,7 +104,7 @@ router.put('/:id', async (req, res) => {
         else {
             res.render('authors/edit', {
                 author: author,
-                errorMessage: 'erorr Updating'
+                errorMessage: 'Erorr Updating Author'
             })
         }
 
