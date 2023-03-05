@@ -44,7 +44,7 @@ try {
 
 //New Book Router
 router.get('/new', async  (req, res) => {
-    renderNewPage(res, new Book(), 'new', false);
+    renderNewPage(res, new Book(), 'new');
 })
 
 
@@ -104,14 +104,9 @@ router.put('/:id', async (req, res) => {
 
 
 // Create Book Route
-router.post('/',   [check('title').isEmpty(), check(' req.body.publishDate').isEmpty(), check(' req.body.author').isEmpty(), check('req.body.description').isEmpty(), ], async  (req, res) => {
-
-    const error = validationResult(req);
-    if (error.isEmpty()) {
-        console.log(error);
-        renderNewPage(res, new Book(), 'new', true);
-        return;
-    }
+router.post('/',   async    (req, res) => {
+    // console.log('here' , req.file)
+// res.send('create book')
 const book = new Book({
     name:req.body.title,
     author:req.body.author,
@@ -129,6 +124,7 @@ try {
     const newBook = await book.save();
     res.redirect('/books');
 } catch (error) {
+    // console.log('somewhete', error);
     renderNewPage(res, book, true)
 }
 })
@@ -153,7 +149,7 @@ router.delete('/:id', async (req, res) => {
 })
 
 
-async function renderNewPage(res, book, form ,hasError){
+async function renderNewPage(res, book, form ,hasError = false){
     renderFormPage(res, book, form, hasError);
 }
 
