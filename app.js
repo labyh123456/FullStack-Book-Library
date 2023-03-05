@@ -26,7 +26,7 @@ app.set("layout", "layouts/layout");
 app.use(expressLayouts);
 
 // public files
-app.use(express.static("public"));
+app.use(express.static(__dirname + "/public"));
 
 // app.get('/', (req, res) => {
 //     res.send('hello world can yo do bro right now if you can help ? because');
